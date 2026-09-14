@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v6
         with:
           submodules: true
 
       # https://github.com/marketplace/actions/github-pages-action
       - name: Setup
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3.2.1
         with:
           hugo-version: 'latest'
           extended: true
@@ -22,8 +22,9 @@ jobs:
         run: hugo --minify --gc
 
       - name: Upload
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v5.0.0
         with:
+          include-hidden-files: true
           path: public
 
   deploy:
@@ -38,4 +39,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v5.0.1
